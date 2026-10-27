@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CODE-ARENA | Online MCQ Quiz & Algorithmic Problem Bank</title>
+  <meta name="description" content="CODE-ARENA is an interactive coding quiz platform and algorithmic problem bank to help you practice, learn, and master your programming skills.">
+  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'/></svg>">
+</head>
+<body>
+
+  <main id="app-viewport">
+
+    <!-- =====================================================================
+         SCREEN 1: LANDING PAGE (CodeArenaMCQ)
+         ===================================================================== -->
+    <section id="landing-view" class="view-section landing-view active-view" data-screen-label="Screen 1: Landing Page">
+      <header class="landing-header">
+        <div class="brand-logo" onclick="switchView('landing-view')">
+          <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+        </div>
+
+        <nav class="landing-nav">
+          <a href="#home" class="active" onclick="switchView('landing-view'); return false;">Home</a>
+          <a href="#features" onclick="switchView('landing-view'); return false;">Features</a>
+          <a href="#languages" onclick="openLanguagesModal(); return false;">Languages</a>
+          <a href="#about" onclick="switchView('landing-view'); return false;">About</a>
+        </nav>
+
+        <div class="landing-auth-actions" id="landing-auth-actions">
+          <button class="btn-secondary" onclick="switchView('auth-view')">Login</button>
+          <button class="btn-primary btn-pill" onclick="switchView('auth-view')">Sign Up</button>
+        </div>
+      </header>
+
+      <div class="landing-hero">
+        <div class="hero-content">
+          <div class="hero-pill-tag">
+            <span>Learn • Practice • Grow</span>
+          </div>
+
+          <h1 class="hero-title">
+            Sharpen Your Skills<br>
+            One <span class="highlight-blue">Question</span> at a Time
+          </h1>
+
+          <p class="hero-subtitle">
+            CodeArenaMCQ is an interactive coding quiz platform to help you practice, learn and master your programming skills.
+          </p>
+
+          <div class="hero-features-grid">
+            <div class="feature-mini-card">
+              <div class="feature-icon-wrapper">&lt;{}&gt;</div>
+              <h4>Multiple<br>Languages</h4>
+            </div>
+            <div class="feature-mini-card">
+              <div class="feature-icon-wrapper">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <h4>Instant<br>Feedback</h4>
+            </div>
+            <div class="feature-mini-card">
+              <div class="feature-icon-wrapper">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <h4>Track<br>Progress</h4>
+            </div>
+            <div class="feature-mini-card">
+              <div class="feature-icon-wrapper">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+              </div>
+              <h4>Build<br>Better</h4>
+            </div>
+          </div>
+
+          <div class="hero-cta-group">
+            <button class="btn-primary btn-pill" onclick="handleGetStarted()">
+              Get Started →
+            </button>
+            <button class="btn-secondary btn-pill" onclick="switchView('auth-view')">
+              Login
+            </button>
+          </div>
+
+          <div class="supported-languages-strip">
+            <span>Supported Languages</span>
+            <div class="lang-icons-row">
+              <div class="lang-badge-item">
+                <span style="color: #ea580c; font-weight: 800;">☕</span> Java
+              </div>
+              <div class="lang-badge-item">
+                <span style="color: #2563eb; font-weight: 800;">🐍</span> Python
+              </div>
+              <div class="lang-badge-item">
+                <span style="color: #0284c7; font-weight: 800;">⚙️</span> C++
+              </div>
+              <div class="lang-badge-item">
+                <span style="color: #f97316; font-weight: 800;">🌐</span> HTML
+              </div>
+              <div class="lang-badge-item">
+                <span style="color: #3b82f6; font-weight: 800;">🎨</span> CSS
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-graphic-pane">
+          <img src="assets/hero_laptop.jpg" alt="CODE-ARENA Interactive Platform Mockup" class="hero-illustration-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SCREEN 2: AUTHENTICATION / LOGIN PAGE
+         ===================================================================== -->
+    <section id="auth-view" class="view-section auth-view" data-screen-label="Screen 2: Login / Auth">
+      <div class="auth-split-card">
+        <!-- Left: Form -->
+        <div class="auth-form-side">
+          <div class="auth-top-nav">
+            <button type="button" class="btn-portal-back" onclick="switchView('landing-view')">
+              ← Back to Home
+            </button>
+          </div>
+          <div class="auth-header-block">
+            <div class="brand-logo" onclick="switchView('landing-view')">
+              <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+            </div>
+            <h2>Welcome Back</h2>
+            <p>Login to continue your coding journey</p>
+          </div>
+
+          <form onsubmit="handleLogin(event)">
+            <div class="auth-form-group">
+              <div class="input-with-icon">
+                <span class="input-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                <input type="text" placeholder="Email or Username" value="pranav.gawande@student.edu" required>
+              </div>
+            </div>
+
+            <div class="auth-form-group">
+              <div class="input-with-icon">
+                <span class="input-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </span>
+                <input type="password" id="login-password-input" placeholder="Password" value="••••••••••••" required>
+                <span class="password-toggle-btn" id="password-toggle-btn" title="Toggle password visibility">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </span>
+              </div>
+            </div>
+
+            <div class="auth-options-row">
+              <label class="checkbox-label">
+                <input type="checkbox" checked>
+                <span>Remember me</span>
+              </label>
+              <a href="#" class="forgot-link" onclick="alert('Password reset link sent to registered email.'); return false;">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; border-radius: var(--radius-md);">
+              Login
+            </button>
+
+            <div class="auth-divider">
+              <span>OR</span>
+            </div>
+
+            <button type="button" class="btn-google" onclick="handleGoogleLogin()">
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+              Continue with Google
+            </button>
+
+            <div class="auth-footer-prompt">
+              Don't have an account? <a href="#" onclick="showToast('Registration is open. Sign up now!'); return false;">Sign Up</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Illustration & Brand Pitch -->
+        <div class="auth-banner-side">
+          <div class="banner-illust-wrapper">
+            <img src="assets/login_illust.jpg" alt="Coding Illustration">
+          </div>
+          <h3>Better Practice<br>Better Results</h3>
+          <p>Join thousands of learners and improve your coding skills with CodeArenaMCQ.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SCREEN 3: STUDENT DASHBOARD
+         ===================================================================== -->
+    <section id="dashboard-view" class="view-section portal-layout" data-screen-label="Screen 3: Student Dashboard">
+      <!-- Portal Sidebar -->
+      <aside class="portal-sidebar">
+        <div class="sidebar-brand-wrapper">
+          <div class="brand-logo" onclick="switchView('landing-view')">
+            <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+          </div>
+        </div>
+
+        <div class="sidebar-profile-card" onclick="openProfileModal()" style="cursor: pointer;" title="Click to view & edit profile">
+          <div class="profile-avatar user-avatar-pill">PG</div>
+          <div class="profile-details">
+            <span class="profile-name user-name-full">Pranav Gawande</span>
+            <span class="profile-role-tag">Student</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav-menu">
+          <div class="sidebar-nav-item active" data-view-target="dashboard-view" onclick="switchView('dashboard-view')">
+            <span class="nav-icon">📊</span> Dashboard
+          </div>
+          <div class="sidebar-nav-item" data-view-target="quiz-runner-view" onclick="switchView('quiz-runner-view')">
+            <span class="nav-icon">📝</span> Take Quiz
+          </div>
+          <div class="sidebar-nav-item" data-view-target="results-view" onclick="switchView('results-view')">
+            <span class="nav-icon">🎯</span> My Attempts
+          </div>
+          <div class="sidebar-nav-item" data-view-target="problem-bank-view" onclick="switchView('problem-bank-view')">
+            <span class="nav-icon">💻</span> Problem Bank
+          </div>
+          <div class="sidebar-nav-item" data-view-target="leaderboard-view" onclick="switchView('leaderboard-view')">
+            <span class="nav-icon">🏆</span> Leaderboard
+          </div>
+          <div class="sidebar-nav-item" onclick="openLanguagesModal()">
+            <span class="nav-icon">🌐</span> Languages
+          </div>
+          <div class="sidebar-nav-item" onclick="openProfileModal()">
+            <span class="nav-icon">👤</span> Profile
+          </div>
+        </nav>
+
+        <div class="sidebar-footer-menu">
+          <div class="sidebar-nav-item" onclick="openSettingsModal()">
+            <span class="nav-icon">⚙️</span> Settings
+          </div>
+          <div class="sidebar-nav-item" onclick="handleLogout()">
+            <span class="nav-icon">🚪</span> Logout
+          </div>
+        </div>
+      </aside>
+
+      <!-- Portal Main Content -->
+      <main class="portal-main">
+        <header class="portal-topbar">
+          <div class="topbar-left-cluster">
+            <button type="button" class="btn-portal-back" onclick="switchView('landing-view')" title="Return to Home Landing Page">
+              ← Back to Home
+            </button>
+            <div class="topbar-greeting">
+              <h1>Dashboard</h1>
+              <p id="dashboard-greeting-msg">Welcome back, Pranav! Keep going, you're doing great!</p>
+            </div>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="topbar-user-pill-container">
+              <div class="topbar-user-pill" id="user-menu-pill" onclick="toggleUserMenu(event)">
+                <div class="mini-avatar user-avatar-pill">PG</div>
+                <span class="user-name-display">Pranav ▾</span>
+              </div>
+              <div class="user-dropdown-menu" id="user-dropdown-menu">
+                <div class="dropdown-header">
+                  <strong class="user-name-full">Pranav Gawande</strong>
+                  <span id="dropdown-program-label">Student • MCA Final Year</span>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-item" onclick="openProfileModal()">
+                  <span>👤 My Profile</span>
+                </div>
+                <div class="dropdown-item" onclick="openLanguagesModal()">
+                  <span>🌐 Languages</span>
+                </div>
+                <div class="dropdown-item" onclick="switchView('results-view'); closeAllDropdowns();">
+                  <span>🎯 My Attempts</span>
+                </div>
+                <div class="dropdown-item" onclick="openSettingsModal()">
+                  <span>⚙️ Settings</span>
+                </div>
+                <div class="dropdown-item" onclick="switchView('admin-view'); closeAllDropdowns(); showToast('Switched to Admin Management Portal');">
+                  <span>🔒 Admin Portal</span>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-item dropdown-logout" onclick="handleLogout()">
+                  <span>🚪 Logout</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- KPI Metrics Grid -->
+        <div class="stats-cards-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Total Quizzes</span>
+              <div class="stat-icon-pill stat-icon-blue">📋</div>
+            </div>
+            <div class="stat-value">12</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Attempted</span>
+              <div class="stat-icon-pill stat-icon-green">✍️</div>
+            </div>
+            <div class="stat-value">8</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Correct Answers</span>
+              <div class="stat-icon-pill stat-icon-amber">💡</div>
+            </div>
+            <div class="stat-value">142</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Accuracy</span>
+              <div class="stat-icon-pill stat-icon-purple">🎯</div>
+            </div>
+            <div class="stat-value">89%</div>
+          </div>
+        </div>
+
+        <!-- Quick Start Quiz Section -->
+        <section class="portal-section-block">
+          <div class="section-block-header">
+            <div>
+              <h2>Quick Start</h2>
+              <div class="sub-desc">Jump into a quiz and test your knowledge!</div>
+            </div>
+            <a href="#" class="view-all-link" onclick="switchView('quiz-runner-view'); return false;">View All →</a>
+          </div>
+
+          <div class="quiz-cards-grid">
+            <!-- Java -->
+            <div class="quiz-quick-card">
+              <div class="quiz-lang-icon-wrap">
+                <span style="font-size: 2rem;">☕</span>
+              </div>
+              <h3>Java</h3>
+              <span class="question-count">20 Questions</span>
+              <button class="btn-card-quiz" onclick="startQuizForLanguage('Java')">Start Quiz</button>
+            </div>
+
+            <!-- Python -->
+            <div class="quiz-quick-card">
+              <div class="quiz-lang-icon-wrap">
+                <span style="font-size: 2rem;">🐍</span>
+              </div>
+              <h3>Python</h3>
+              <span class="question-count">20 Questions</span>
+              <button class="btn-card-quiz" onclick="startQuizForLanguage('Python')">Start Quiz</button>
+            </div>
+
+            <!-- HTML -->
+            <div class="quiz-quick-card">
+              <div class="quiz-lang-icon-wrap">
+                <span style="font-size: 2rem;">🌐</span>
+              </div>
+              <h3>HTML</h3>
+              <span class="question-count">15 Questions</span>
+              <button class="btn-card-quiz" onclick="startQuizForLanguage('HTML')">Start Quiz</button>
+            </div>
+
+            <!-- CSS -->
+            <div class="quiz-quick-card">
+              <div class="quiz-lang-icon-wrap">
+                <span style="font-size: 2rem;">🎨</span>
+              </div>
+              <h3>CSS</h3>
+              <span class="question-count">15 Questions</span>
+              <button class="btn-card-quiz" onclick="startQuizForLanguage('CSS')">Start Quiz</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recent Attempts Section -->
+        <section class="portal-section-block">
+          <div class="section-block-header">
+            <h2>Recent Attempts</h2>
+            <a href="#" class="view-all-link" onclick="switchView('results-view'); return false;">View All →</a>
+          </div>
+
+          <div class="data-table-container">
+            <table class="codearena-table">
+              <thead>
+                <tr>
+                  <th>Quiz Name</th>
+                  <th>Language</th>
+                  <th>Score</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="cursor: pointer;" onclick="switchView('results-view')">
+                  <td style="font-weight: 600;">Python - Basic</td>
+                  <td>
+                    <span class="lang-cell-badge">🐍 Python</span>
+                  </td>
+                  <td style="font-weight: 600; color: var(--success-primary);">8/10 (80%)</td>
+                  <td>19 Oct 2026 10:32</td>
+                </tr>
+                <tr style="cursor: pointer;" onclick="switchView('results-view')">
+                  <td style="font-weight: 600;">Java - OOP</td>
+                  <td>
+                    <span class="lang-cell-badge">☕ Java</span>
+                  </td>
+                  <td style="font-weight: 600; color: var(--primary-600);">7/10 (70%)</td>
+                  <td>18 Oct 2026 16:21</td>
+                </tr>
+                <tr style="cursor: pointer;" onclick="switchView('results-view')">
+                  <td style="font-weight: 600;">HTML - Basics</td>
+                  <td>
+                    <span class="lang-cell-badge">🌐 HTML</span>
+                  </td>
+                  <td style="font-weight: 600; color: var(--success-primary);">10/10 (100%)</td>
+                  <td>16 Oct 2026 10:15</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </section>
+
+    <!-- =====================================================================
+         SCREEN 4: ACTIVE QUIZ INTERFACE (MCQ Test Runner)
+         ===================================================================== -->
+    <section id="quiz-runner-view" class="view-section quiz-runner-view" data-screen-label="Screen 4: MCQ Quiz Runner">
+      <header class="quiz-runner-header">
+        <div class="quiz-header-left">
+          <div class="brand-logo" onclick="switchView('dashboard-view')">
+            <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+          </div>
+          <button class="quiz-back-btn" onclick="exitQuizToDashboard()">
+            ← Back to Dashboard
+          </button>
+        </div>
+
+        <div class="quiz-header-center">
+          <span class="quiz-progress-label" id="quiz-progress-text">Question 4 of 10</span>
+          <div class="quiz-linear-bar-wrapper">
+            <div class="quiz-linear-bar-fill" id="quiz-progress-bar-fill" style="width: 40%;"></div>
+          </div>
+        </div>
+
+        <div class="quiz-header-right">
+          <div class="quiz-timer-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span id="quiz-timer-display">00:18:45</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="quiz-runner-body">
+        <!-- Question Test Area (Left) -->
+        <div class="quiz-question-card">
+          <div>
+            <div class="quiz-question-header-row">
+              <div class="quiz-badge-group">
+                <span class="question-tag-pill" id="quiz-question-tag">Multiple Choice</span>
+                <span class="quiz-status-pill unattempted" id="quiz-attempted-pill">Not Attempted</span>
+                <span class="quiz-status-pill marked" id="quiz-marked-pill" style="display: none;">🔖 Marked for Review</span>
+              </div>
+            </div>
+            <h2 class="question-statement" id="quiz-question-statement">
+              Which of the following is the correct way to create a list in Python?
+            </h2>
+
+            <div class="question-options-list" id="quiz-options-container">
+              <!-- Dynamically populated via JS -->
+            </div>
+
+            <!-- Review Mode: Selected Answer, Correct Answer & Explanation Box -->
+            <div id="quiz-explanation-box" class="quiz-explanation-box" style="display: none;"></div>
+          </div>
+
+          <div class="quiz-card-footer">
+            <div class="footer-left-actions">
+              <button class="btn-secondary" id="quiz-prev-btn" onclick="prevQuizQuestion()">Previous</button>
+            </div>
+            <div class="footer-center-actions">
+              <button class="btn-secondary btn-mark-review" id="quiz-mark-btn" onclick="toggleMarkQuestion()">
+                <span>🔖 Mark for Review</span>
+              </button>
+              <button class="btn-secondary btn-clear-opt" id="quiz-clear-btn" onclick="clearSelectedOption()" title="Clear your selected answer">
+                ✕ Clear Response
+              </button>
+            </div>
+            <div class="footer-right-actions">
+              <button class="btn-primary" id="quiz-next-btn" onclick="nextQuizQuestion()">Next →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Palette (Right) -->
+        <div class="quiz-palette-card">
+          <div class="palette-header-row">
+            <h3>Question Palette</h3>
+            <div class="palette-stats-summary" id="quiz-palette-stats">
+              <span class="palette-stat-badge stat-answered">✓ 0 Attempted</span>
+              <span class="palette-stat-badge stat-marked">🔖 0 Marked</span>
+            </div>
+          </div>
+          <div class="palette-grid" id="quiz-palette-grid">
+            <!-- Palette numbers 1..10 -->
+          </div>
+
+          <div class="palette-legend">
+            <div class="legend-item">
+              <span class="legend-color-box legend-answered"></span>
+              <span>Answered (Attempted)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color-box legend-marked"></span>
+              <span>Marked for Review</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color-box legend-marked-answered"></span>
+              <span>Answered &amp; Marked</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color-box legend-current"></span>
+              <span>Current Question</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color-box legend-unanswered"></span>
+              <span>Not Answered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SCREEN 5: PROBLEM BANK (Algorithmic Problems Directory)
+         ===================================================================== -->
+    <section id="problem-bank-view" class="view-section portal-layout" data-screen-label="Screen 5: Problem Bank">
+      <!-- Sidebar -->
+      <aside class="portal-sidebar">
+        <div class="sidebar-brand-wrapper">
+          <div class="brand-logo" onclick="switchView('landing-view')">
+            <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+          </div>
+        </div>
+
+        <div class="sidebar-profile-card" onclick="openProfileModal()" style="cursor: pointer;" title="Click to view & edit profile">
+          <div class="profile-avatar user-avatar-pill">PG</div>
+          <div class="profile-details">
+            <span class="profile-name user-name-full">Pranav Gawande</span>
+            <span class="profile-role-tag">Student</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav-menu">
+          <div class="sidebar-nav-item" data-view-target="dashboard-view" onclick="switchView('dashboard-view')">
+            <span class="nav-icon">📊</span> Dashboard
+          </div>
+          <div class="sidebar-nav-item" data-view-target="quiz-runner-view" onclick="switchView('quiz-runner-view')">
+            <span class="nav-icon">📝</span> Take Quiz
+          </div>
+          <div class="sidebar-nav-item" data-view-target="results-view" onclick="switchView('results-view')">
+            <span class="nav-icon">🎯</span> My Attempts
+          </div>
+          <div class="sidebar-nav-item active" data-view-target="problem-bank-view" onclick="switchView('problem-bank-view')">
+            <span class="nav-icon">💻</span> Problem Bank
+          </div>
+          <div class="sidebar-nav-item" data-view-target="leaderboard-view" onclick="switchView('leaderboard-view')">
+            <span class="nav-icon">🏆</span> Leaderboard
+          </div>
+          <div class="sidebar-nav-item" onclick="openLanguagesModal()">
+            <span class="nav-icon">🌐</span> Languages
+          </div>
+          <div class="sidebar-nav-item" onclick="openProfileModal()">
+            <span class="nav-icon">👤</span> Profile
+          </div>
+        </nav>
+
+        <div class="sidebar-footer-menu">
+          <div class="sidebar-nav-item" onclick="openSettingsModal()">
+            <span class="nav-icon">⚙️</span> Settings
+          </div>
+          <div class="sidebar-nav-item" onclick="handleLogout()">
+            <span class="nav-icon">🚪</span> Logout
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="portal-main">
+        <header class="portal-topbar">
+          <div class="topbar-left-cluster">
+            <button type="button" class="btn-portal-back" onclick="switchView('dashboard-view')" title="Return to Dashboard">
+              ← Back to Dashboard
+            </button>
+            <div class="topbar-greeting">
+              <h1>Problem Bank</h1>
+              <p>Practice with coding problems and improve your skills</p>
+            </div>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="topbar-user-pill">
+              <div class="mini-avatar">PG</div>
+              <span>Pranav ▾</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Filter Toolbar -->
+        <div class="table-filter-toolbar">
+          <div class="filters-dropdown-group">
+            <select class="filter-select" id="problem-lang-filter" onchange="renderProblemBankTable()">
+              <option>All Languages</option>
+              <option>Python</option>
+              <option>Java</option>
+              <option>C++</option>
+            </select>
+
+            <select class="filter-select" id="problem-topic-filter" onchange="renderProblemBankTable()">
+              <option>All Topics</option>
+              <option>Array</option>
+              <option>String</option>
+              <option>Searching</option>
+              <option>Linked List</option>
+              <option>Stack</option>
+              <option>Math & Logic</option>
+              <option>Design</option>
+            </select>
+
+            <select class="filter-select" id="problem-diff-filter" onchange="renderProblemBankTable()">
+              <option>All Difficulties</option>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+            </select>
+          </div>
+
+          <div class="search-input-box">
+            <span class="search-icon-pos">🔍</span>
+            <input type="text" id="problem-search-input" placeholder="Search problems..." oninput="renderProblemBankTable()">
+          </div>
+        </div>
+
+        <!-- Problems Table -->
+        <div class="data-table-container">
+          <table class="codearena-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Topic</th>
+                <th>Difficulty</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="problem-bank-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </section>
+
+    <!-- =====================================================================
+         SCREEN 6: PROBLEM DETAIL & CODE EDITOR (LeetCode Style)
+         ===================================================================== -->
+    <section id="code-workspace-view" class="view-section code-workspace-view" data-screen-label="Screen 6: Code Workspace">
+      <header class="workspace-header">
+        <div class="brand-logo" onclick="switchView('dashboard-view')">
+          <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+        </div>
+
+        <div class="workspace-header-actions" style="display: flex; gap: 10px;">
+          <button class="quiz-back-btn" onclick="switchView('problem-bank-view')">
+            ← Back to Problems
+          </button>
+          <button class="quiz-back-btn" onclick="switchView('dashboard-view')">
+            ← Back to Dashboard
+          </button>
+        </div>
+      </header>
+
+      <div class="workspace-split-container">
+        <!-- Left Pane: Problem Description -->
+        <div class="problem-description-pane">
+          <div class="problem-pane-title-row">
+            <h1 id="workspace-problem-title">Two Sum</h1>
+            <span id="workspace-problem-topic" class="badge-pill" style="background: var(--slate-100); color: var(--slate-700);">Array</span>
+            <span id="workspace-problem-difficulty" class="badge-pill badge-easy">Easy</span>
+            <span id="workspace-problem-status" class="badge-pill badge-solved">Solved</span>
+          </div>
+
+          <div id="workspace-problem-content" class="problem-markdown-content">
+            <!-- Dynamically populated via openProblemInWorkspace() -->
+          </div>
+        </div>
+
+        <!-- Right Pane: Code Editor -->
+        <div class="code-editor-pane">
+          <div class="editor-toolbar">
+            <div class="editor-lang-tabs">
+              <span class="lang-tab active" data-lang="python" onclick="setEditorLanguage('python')">Python</span>
+              <span class="lang-tab" data-lang="java" onclick="setEditorLanguage('java')">Java</span>
+              <span class="lang-tab" data-lang="cpp" onclick="setEditorLanguage('cpp')">C++</span>
+            </div>
+
+            <div class="editor-aux-actions">
+              <button type="button" class="btn-editor-tool btn-clear-code" onclick="clearEditorScreen()" title="Clear coding screen to write your answer from scratch">
+                🗑 Clear Screen
+              </button>
+              <button type="button" class="btn-editor-tool" title="Reset Code to Starter Template" onclick="initCodeEditor(); showToast('Reset code to starter template');">
+                ↺ Reset
+              </button>
+              <button type="button" class="btn-editor-tool" title="Settings" onclick="openSettingsModal()">⚙</button>
+              <button type="button" class="btn-editor-tool" title="Expand Editor" onclick="showToast('Expanded code editor');">⛶</button>
+            </div>
+          </div>
+
+          <div class="editor-main-area">
+            <div class="line-numbers-col" id="line-numbers-container">
+              <!-- Dynamically generated line numbers -->
+            </div>
+            <textarea class="code-textarea" id="code-editor-textarea" spellcheck="false"></textarea>
+          </div>
+
+          <!-- Bottom Drawer for Test Cases Output & Coding Console -->
+          <div class="editor-output-drawer show" id="editor-output-drawer">
+            <div class="console-drawer-header">
+              <div class="console-header-left">
+                <span class="console-icon">&gt;_</span>
+                <span class="console-header-title">Console &amp; Test Results</span>
+                <span class="console-status-pill pill-ready" id="console-status-pill">● Ready</span>
+              </div>
+              <div class="console-header-actions">
+                <button type="button" class="btn-console-tool btn-console-clear" id="btn-clear-console" onclick="clearConsole()" title="Clear Console Screen (wipes output &amp; errors)">
+                  🗑 Clear Screen
+                </button>
+                <button type="button" class="btn-console-tool btn-console-chevron" onclick="toggleConsoleDrawer()" title="Collapse Console">
+                  <span id="console-toggle-icon">▾</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="console-output-body" id="console-output-body">
+              <div class="console-empty-prompt">
+                <div class="console-prompt-line"><span class="prompt-sym">$</span> <span>arena-cli --status ready</span></div>
+                <div class="console-prompt-help">
+                  Console is clear. Write or modify your code in the editor above.<br>
+                  Click <strong>▷ Run</strong> to test sample cases or <strong>Submit</strong> to evaluate your solution with detailed explanation.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="editor-bottom-bar">
+            <div class="editor-console-toggle" onclick="toggleConsoleDrawer()">
+              <span class="console-toggle-indicator">&gt;_</span>
+              <span id="bottom-console-label">Console ▾</span>
+            </div>
+
+            <div class="editor-exec-actions">
+              <button type="button" class="btn-console-clear-quick" onclick="clearConsole()" title="Clear Console Screen">
+                🗑 Clear Screen
+              </button>
+              <button type="button" class="btn-editor-run" onclick="runCodeTestCases()">▷ Run</button>
+              <button type="button" class="btn-editor-submit" onclick="submitCodeSolution()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SCREEN 7: QUIZ COMPLETED / RESULTS & BREAKDOWN
+         ===================================================================== -->
+    <section id="results-view" class="view-section portal-layout" data-screen-label="Screen 7: Quiz Results">
+      <!-- Sidebar -->
+      <aside class="portal-sidebar">
+        <div class="sidebar-brand-wrapper">
+          <div class="brand-logo" onclick="switchView('landing-view')">
+            <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+          </div>
+        </div>
+
+        <div class="sidebar-profile-card" onclick="openProfileModal()" style="cursor: pointer;" title="Click to view & edit profile">
+          <div class="profile-avatar user-avatar-pill">PG</div>
+          <div class="profile-details">
+            <span class="profile-name user-name-full">Pranav Gawande</span>
+            <span class="profile-role-tag">Student</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav-menu">
+          <div class="sidebar-nav-item" data-view-target="dashboard-view" onclick="switchView('dashboard-view')">
+            <span class="nav-icon">📊</span> Dashboard
+          </div>
+          <div class="sidebar-nav-item" data-view-target="quiz-runner-view" onclick="switchView('quiz-runner-view')">
+            <span class="nav-icon">📝</span> Take Quiz
+          </div>
+          <div class="sidebar-nav-item active" data-view-target="results-view" onclick="switchView('results-view')">
+            <span class="nav-icon">🎯</span> My Attempts
+          </div>
+          <div class="sidebar-nav-item" data-view-target="problem-bank-view" onclick="switchView('problem-bank-view')">
+            <span class="nav-icon">💻</span> Problem Bank
+          </div>
+          <div class="sidebar-nav-item" data-view-target="leaderboard-view" onclick="switchView('leaderboard-view')">
+            <span class="nav-icon">🏆</span> Leaderboard
+          </div>
+          <div class="sidebar-nav-item" onclick="openLanguagesModal()">
+            <span class="nav-icon">🌐</span> Languages
+          </div>
+          <div class="sidebar-nav-item" onclick="openProfileModal()">
+            <span class="nav-icon">👤</span> Profile
+          </div>
+        </nav>
+
+        <div class="sidebar-footer-menu">
+          <div class="sidebar-nav-item" onclick="openSettingsModal()">
+            <span class="nav-icon">⚙️</span> Settings
+          </div>
+          <div class="sidebar-nav-item" onclick="handleLogout()">
+            <span class="nav-icon">🚪</span> Logout
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Results Content -->
+      <main class="portal-main">
+        <header class="portal-topbar">
+          <div class="topbar-left-cluster">
+            <button type="button" class="btn-portal-back" onclick="switchView('dashboard-view')" title="Return to Dashboard">
+              ← Back to Dashboard
+            </button>
+            <div class="topbar-greeting">
+              <h1>Quiz Assessment Scorecard</h1>
+              <p>Review your answers and detailed performance analysis</p>
+            </div>
+          </div>
+        </header>
+
+        <div class="results-grid-container">
+          <!-- Left: Celebration & Donut Chart -->
+          <div class="result-card-celebration">
+            <div class="trophy-image-wrap">
+              <img src="assets/quiz_trophy.jpg" alt="Victory Trophy">
+            </div>
+
+            <h2>Quiz Completed!</h2>
+            <p class="praise-msg">You did an amazing job!</p>
+
+            <!-- Donut Gauge -->
+            <div class="donut-gauge-wrapper">
+              <svg class="donut-svg" viewBox="0 0 160 160">
+                <circle class="donut-bg" cx="80" cy="80" r="70" />
+                <circle class="donut-progress" id="donut-progress-circle" cx="80" cy="80" r="70" />
+              </svg>
+              <div class="donut-center-info">
+                <span class="donut-score-text" id="results-score-display">8/10</span>
+                <span class="donut-score-sub">Score</span>
+              </div>
+            </div>
+
+            <div class="accuracy-pill-box">
+              <div class="accuracy-item">
+                <span style="color: var(--primary-600);">🎯</span>
+                <span id="results-accuracy-pct">80% Accuracy</span>
+              </div>
+              <div class="accuracy-item">
+                <span style="color: var(--slate-500);">⏱</span>
+                <span>00:06:32 Time Taken</span>
+              </div>
+              <div class="accuracy-item">
+                <span style="color: var(--slate-500);">🔁</span>
+                <span>2 Total Attempts</span>
+              </div>
+            </div>
+
+            <div class="result-actions-row">
+              <button class="btn-primary" onclick="startQuizReview()">
+                View Answers &amp; Explanations
+              </button>
+              <button class="btn-secondary" onclick="retakeQuiz()">
+                Retake Quiz
+              </button>
+              <button class="btn-secondary" onclick="switchView('dashboard-view')">
+                ← Back to Dashboard
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Breakdown Card -->
+          <div class="performance-overview-card">
+            <h3>Performance Overview</h3>
+
+            <div class="performance-mini-pills">
+              <div class="metric-pill-box pill-green">
+                <span class="p-num" id="pill-correct-count">8</span>
+                <span class="p-label">Correct</span>
+              </div>
+              <div class="metric-pill-box pill-red">
+                <span class="p-num" id="pill-incorrect-count">2</span>
+                <span class="p-label">Incorrect</span>
+              </div>
+              <div class="metric-pill-box pill-gray">
+                <span class="p-num" id="pill-skipped-count">0</span>
+                <span class="p-label">Skipped</span>
+              </div>
+            </div>
+
+            <div class="breakdown-title">Question Breakdown</div>
+
+            <div class="breakdown-rows-list">
+              <!-- Easy -->
+              <div class="breakdown-row">
+                <div class="breakdown-label-col">
+                  <span class="dot-indicator" style="background: var(--success-primary);"></span>
+                  <span>Easy</span>
+                </div>
+                <div class="breakdown-bar-col">
+                  <div class="breakdown-bar-fill fill-easy"></div>
+                </div>
+                <div class="breakdown-stat-col">4/5 80%</div>
+              </div>
+
+              <!-- Medium -->
+              <div class="breakdown-row">
+                <div class="breakdown-label-col">
+                  <span class="dot-indicator" style="background: var(--warning-primary);"></span>
+                  <span>Medium</span>
+                </div>
+                <div class="breakdown-bar-col">
+                  <div class="breakdown-bar-fill fill-medium"></div>
+                </div>
+                <div class="breakdown-stat-col">3/5 60%</div>
+              </div>
+
+              <!-- Hard -->
+              <div class="breakdown-row">
+                <div class="breakdown-label-col">
+                  <span class="dot-indicator" style="background: var(--danger-primary);"></span>
+                  <span>Hard</span>
+                </div>
+                <div class="breakdown-bar-col">
+                  <div class="breakdown-bar-fill fill-hard"></div>
+                </div>
+                <div class="breakdown-stat-col">1/5 20%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <!-- =====================================================================
+         SCREEN 8: LEADERBOARD
+         ===================================================================== -->
+    <section id="leaderboard-view" class="view-section portal-layout" data-screen-label="Screen 8: Leaderboard">
+      <!-- Sidebar -->
+      <aside class="portal-sidebar">
+        <div class="sidebar-brand-wrapper">
+          <div class="brand-logo" onclick="switchView('landing-view')">
+            <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+          </div>
+        </div>
+
+        <div class="sidebar-profile-card" onclick="openProfileModal()" style="cursor: pointer;" title="Click to view & edit profile">
+          <div class="profile-avatar user-avatar-pill">PG</div>
+          <div class="profile-details">
+            <span class="profile-name user-name-full">Pranav Gawande</span>
+            <span class="profile-role-tag">Student</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav-menu">
+          <div class="sidebar-nav-item" data-view-target="dashboard-view" onclick="switchView('dashboard-view')">
+            <span class="nav-icon">📊</span> Dashboard
+          </div>
+          <div class="sidebar-nav-item" data-view-target="quiz-runner-view" onclick="switchView('quiz-runner-view')">
+            <span class="nav-icon">📝</span> Take Quiz
+          </div>
+          <div class="sidebar-nav-item" data-view-target="results-view" onclick="switchView('results-view')">
+            <span class="nav-icon">🎯</span> My Attempts
+          </div>
+          <div class="sidebar-nav-item" data-view-target="problem-bank-view" onclick="switchView('problem-bank-view')">
+            <span class="nav-icon">💻</span> Problem Bank
+          </div>
+          <div class="sidebar-nav-item active" data-view-target="leaderboard-view" onclick="switchView('leaderboard-view')">
+            <span class="nav-icon">🏆</span> Leaderboard
+          </div>
+          <div class="sidebar-nav-item" onclick="openLanguagesModal()">
+            <span class="nav-icon">🌐</span> Languages
+          </div>
+          <div class="sidebar-nav-item" onclick="openProfileModal()">
+            <span class="nav-icon">👤</span> Profile
+          </div>
+        </nav>
+
+        <div class="sidebar-footer-menu">
+          <div class="sidebar-nav-item" onclick="openSettingsModal()">
+            <span class="nav-icon">⚙️</span> Settings
+          </div>
+          <div class="sidebar-nav-item" onclick="handleLogout()">
+            <span class="nav-icon">🚪</span> Logout
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Leaderboard -->
+      <main class="portal-main">
+        <header class="portal-topbar">
+          <div class="topbar-left-cluster">
+            <button type="button" class="btn-portal-back" onclick="switchView('dashboard-view')" title="Return to Dashboard">
+              ← Back to Dashboard
+            </button>
+            <div class="topbar-greeting">
+              <h1>Leaderboard</h1>
+              <p>Top performers in the CodeArena community</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-tabs-row">
+            <button class="lb-tab-btn active" onclick="setLeaderboardTab(this, 'All Time')">All Time</button>
+            <button class="lb-tab-btn" onclick="setLeaderboardTab(this, 'This Week')">This Week</button>
+            <button class="lb-tab-btn" onclick="setLeaderboardTab(this, 'This Month')">This Month</button>
+          </div>
+        </header>
+
+        <div class="data-table-container">
+          <table class="codearena-table">
+            <thead>
+              <tr>
+                <th style="width: 70px; text-align: center;">Rank</th>
+                <th>User</th>
+                <th>Quizzes</th>
+                <th>Accuracy</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </section>
+
+    <!-- =====================================================================
+         SCREEN 9: QUESTION MANAGEMENT / ACADEMIC ADMIN PORTAL
+         ===================================================================== -->
+    <section id="admin-view" class="view-section portal-layout" data-screen-label="Screen 9: Admin Portal">
+      <!-- Admin Sidebar -->
+      <aside class="portal-sidebar">
+        <div class="sidebar-brand-wrapper">
+          <div class="brand-logo" onclick="switchView('landing-view')">
+            <span class="brand-icon">&lt;/&gt;</span> CODE-ARENA
+          </div>
+        </div>
+
+        <div class="sidebar-profile-card">
+          <div class="profile-avatar avatar-admin">AD</div>
+          <div class="profile-details">
+            <span class="profile-name">System Admin</span>
+            <span class="profile-role-tag" style="color: var(--purple-primary);">Faculty / Admin</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav-menu">
+          <div class="sidebar-nav-item" onclick="switchView('dashboard-view')">
+            <span class="nav-icon">📊</span> Dashboard
+          </div>
+          <div class="sidebar-nav-item active" data-view-target="admin-view" onclick="switchView('admin-view')">
+            <span class="nav-icon">❓</span> Questions
+          </div>
+          <div class="sidebar-nav-item" onclick="switchView('problem-bank-view')">
+            <span class="nav-icon">💻</span> Problems
+          </div>
+          <div class="sidebar-nav-item" onclick="showToast('Admin: Managing enrolled students...')">
+            <span class="nav-icon">👥</span> Users
+          </div>
+          <div class="sidebar-nav-item" onclick="showToast('Admin: System Analytics & Grade Distribution')">
+            <span class="nav-icon">📈</span> Analytics
+          </div>
+          <div class="sidebar-nav-item" onclick="openSettingsModal()">
+            <span class="nav-icon">⚙️</span> Settings
+          </div>
+        </nav>
+
+        <div class="sidebar-footer-menu">
+          <div class="sidebar-nav-item" onclick="handleLogout()">
+            <span class="nav-icon">🚪</span> Logout
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Question Management Content -->
+      <main class="portal-main">
+        <header class="portal-topbar">
+          <div class="topbar-left-cluster">
+            <button type="button" class="btn-portal-back" onclick="switchView('dashboard-view')" title="Return to Dashboard">
+              ← Back to Dashboard
+            </button>
+            <div class="topbar-greeting">
+              <h1>Question Management</h1>
+              <p>Manage quiz questions and categories</p>
+            </div>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="btn-primary btn-pill" onclick="openAddQuestionModal()">
+              + Add Question
+            </button>
+            <div class="topbar-user-pill">
+              <div class="mini-avatar" style="background: var(--slate-800);">AD</div>
+              <span>Admin ▾</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Search & Filter Toolbar -->
+        <div class="table-filter-toolbar">
+          <div class="search-input-box" style="flex: 1; max-width: 450px;">
+            <span class="search-icon-pos">🔍</span>
+            <input type="text" id="admin-search-input" placeholder="Search questions..." oninput="renderAdminTable()">
+          </div>
+
+          <div class="filters-dropdown-group">
+            <select class="filter-select" id="admin-topic-filter" onchange="renderAdminTable()">
+              <option>All Topics</option>
+              <option>Arrays</option>
+              <option>OOP</option>
+              <option>HTML</option>
+              <option>Loops</option>
+              <option>Functions</option>
+            </select>
+
+            <select class="filter-select" id="admin-diff-filter" onchange="renderAdminTable()">
+              <option>All Difficulty</option>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Questions Table -->
+        <div class="data-table-container">
+          <table class="codearena-table">
+            <thead>
+              <tr>
+                <th style="width: 80px;">ID</th>
+                <th>Question</th>
+                <th>Topic</th>
+                <th>Difficulty</th>
+                <th style="width: 100px; text-align: center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-questions-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </section>
+
+  </main>
+
+  <!-- =======================================================================
+       MODAL: ADD NEW QUESTION (Admin Feature)
+       ======================================================================= -->
+  <div class="modal-backdrop" id="add-question-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>+ Add New Quiz Question</h3>
+        <button class="modal-close-btn" onclick="closeAddQuestionModal()">&times;</button>
+      </div>
+      <form onsubmit="saveNewQuestion(event)">
+        <div class="modal-body">
+          <div class="modal-field">
+            <label for="modal-q-text">Question Statement *</label>
+            <textarea id="modal-q-text" rows="3" placeholder="Enter question statement here..." required></textarea>
+          </div>
+
+          <div class="modal-form-grid">
+            <div class="modal-field">
+              <label for="modal-q-topic">Topic / Category *</label>
+              <select id="modal-q-topic" required>
+                <option value="Arrays">Arrays</option>
+                <option value="OOP">OOP</option>
+                <option value="HTML">HTML</option>
+                <option value="Loops">Loops</option>
+                <option value="Functions">Functions</option>
+                <option value="Data Structures">Data Structures</option>
+              </select>
+            </div>
+
+            <div class="modal-field">
+              <label for="modal-q-diff">Difficulty Tier *</label>
+              <select id="modal-q-diff" required>
+                <option value="Easy">Easy (1 Mark)</option>
+                <option value="Medium">Medium (2 Marks)</option>
+                <option value="Hard">Hard (3 Marks)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-grid">
+            <div class="modal-field">
+              <label>Option A</label>
+              <input type="text" placeholder="Option A text" required>
+            </div>
+            <div class="modal-field">
+              <label>Option B</label>
+              <input type="text" placeholder="Option B text" required>
+            </div>
+            <div class="modal-field">
+              <label>Option C</label>
+              <input type="text" placeholder="Option C text" required>
+            </div>
+            <div class="modal-field">
+              <label>Option D</label>
+              <input type="text" placeholder="Option D text" required>
+            </div>
+          </div>
+
+          <div class="modal-field">
+            <label>Correct Option</label>
+            <select>
+              <option value="0">Option A</option>
+              <option value="1">Option B</option>
+              <option value="2">Option C</option>
+              <option value="3">Option D</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeAddQuestionModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Question</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL: STUDENT PROFILE (Interactive & Editable)
+       ======================================================================= -->
+  <div class="modal-backdrop" id="profile-modal">
+    <div class="modal-dialog" style="max-width: 540px;">
+      <div class="modal-header">
+        <div>
+          <h3>👤 Student Profile & Academic Details</h3>
+          <p style="font-size: 0.8rem; color: var(--slate-500); margin-top: 2px;">
+            View and manage your student credentials and target learning goals
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal()">&times;</button>
+      </div>
+
+      <form onsubmit="saveUserProfile(event)">
+        <div class="modal-body" style="padding: 24px;">
+          <!-- Avatar & Header info -->
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--slate-100);">
+            <div class="profile-avatar user-avatar-pill" style="width: 60px; height: 60px; font-size: 1.4rem;">PG</div>
+            <div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--slate-900);" id="profile-modal-name-display">Pranav Gawande</h3>
+              <div style="font-size: 0.82rem; color: var(--primary-600); font-weight: 600;">Student ID: MCA-2026-042 • Active</div>
+            </div>
+          </div>
+
+          <!-- Academic KPI Badges -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px;">
+            <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 10px 6px; text-align: center;">
+              <div style="font-size: 1.15rem; font-weight: 800; color: var(--primary-600); font-family: var(--font-heading);">#8</div>
+              <div style="font-size: 0.68rem; color: var(--slate-500); text-transform: uppercase; font-weight: 600;">Rank</div>
+            </div>
+            <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 10px 6px; text-align: center;">
+              <div style="font-size: 1.15rem; font-weight: 800; color: var(--success-primary); font-family: var(--font-heading);">89%</div>
+              <div style="font-size: 0.68rem; color: var(--slate-500); text-transform: uppercase; font-weight: 600;">Accuracy</div>
+            </div>
+            <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 10px 6px; text-align: center;">
+              <div style="font-size: 1.15rem; font-weight: 800; color: var(--slate-900); font-family: var(--font-heading);">12</div>
+              <div style="font-size: 0.68rem; color: var(--slate-500); text-transform: uppercase; font-weight: 600;">Quizzes</div>
+            </div>
+            <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 10px 6px; text-align: center;">
+              <div style="font-size: 1.15rem; font-weight: 800; color: var(--purple-primary); font-family: var(--font-heading);">580</div>
+              <div style="font-size: 0.68rem; color: var(--slate-500); text-transform: uppercase; font-weight: 600;">Total XP</div>
+            </div>
+          </div>
+
+          <!-- Form Fields -->
+          <div class="modal-field">
+            <label for="edit-profile-name">Full Name *</label>
+            <input type="text" id="edit-profile-name" value="Pranav Gawande" required>
+          </div>
+
+          <div class="modal-field">
+            <label for="edit-profile-email">Institutional Email *</label>
+            <input type="email" id="edit-profile-email" value="pranav.gawande@student.edu" required>
+          </div>
+
+          <div class="modal-form-grid">
+            <div class="modal-field">
+              <label for="edit-profile-program">Degree / Program</label>
+              <input type="text" id="edit-profile-program" value="Master of Computer Applications (MCA)">
+            </div>
+            <div class="modal-field">
+              <label for="edit-profile-lang">Primary Focus Track</label>
+              <select id="edit-profile-lang">
+                <option value="Python" selected>Python</option>
+                <option value="Java">Java</option>
+                <option value="C++">C++</option>
+                <option value="Full Stack (HTML/CSS/JS)">Full Stack (HTML/CSS/JS)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-field">
+            <label for="edit-profile-goal">Target Career / Skill Objective</label>
+            <input type="text" id="edit-profile-goal" value="Crack software engineering technical assessments & coding rounds">
+          </div>
+
+          <div style="text-align: left; background: #f8fafc; border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 12px 14px; margin-top: 14px;">
+            <div style="font-size: 0.78rem; font-weight: 700; color: var(--slate-700); margin-bottom: 6px;">Earned Milestones:</div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="badge-pill badge-solved">🥇 Top 10 Performer</span>
+              <span class="badge-pill" style="background: #e0f2fe; color: #0284c7;">🐍 Python Certified</span>
+              <span class="badge-pill" style="background: #fef3c7; color: #d97706;">☕ Java OOP</span>
+              <span class="badge-pill" style="background: #f5f3ff; color: #7c3aed;">⚡ Rapid Solver</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeProfileModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Profile Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL: LANGUAGES & SKILL TRACKS HUB
+       ======================================================================= -->
+  <div class="modal-backdrop" id="languages-modal">
+    <div class="modal-dialog" style="max-width: 780px;">
+      <div class="modal-header">
+        <div>
+          <h3>🌐 Programming Languages & Tracks</h3>
+          <p style="font-size: 0.8rem; color: var(--slate-500); margin-top: 2px;">
+            Choose a language track to launch MCQ tests or practice algorithmic problems
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="closeLanguagesModal()">&times;</button>
+      </div>
+
+      <div class="modal-body" style="padding: 20px 24px;">
+        <div class="languages-modal-grid">
+          <!-- Java -->
+          <div class="lang-card-item">
+            <div class="lang-card-header">
+              <span class="lang-card-icon">☕</span>
+              <div class="lang-card-title">
+                <h4>Java Development</h4>
+                <span>20 Questions • 3 Tiers</span>
+              </div>
+            </div>
+            <div class="lang-card-topics">
+              Core Syntax, OOP Concepts, Collections Framework, Multithreading & Concurrency.
+            </div>
+            <div class="lang-card-actions">
+              <button class="btn-lang-quiz" onclick="closeLanguagesModal(); startQuizForLanguage('Java');">Take Quiz</button>
+              <button class="btn-lang-problems" onclick="closeLanguagesModal(); openProblemBankWithLanguage('Java');">Problems</button>
+            </div>
+          </div>
+
+          <!-- Python -->
+          <div class="lang-card-item">
+            <div class="lang-card-header">
+              <span class="lang-card-icon">🐍</span>
+              <div class="lang-card-title">
+                <h4>Python Programming</h4>
+                <span>20 Questions • 3 Tiers</span>
+              </div>
+            </div>
+            <div class="lang-card-topics">
+              Data Structures, Slicing, List Comprehensions, Lambda, OOP & Modules.
+            </div>
+            <div class="lang-card-actions">
+              <button class="btn-lang-quiz" onclick="closeLanguagesModal(); startQuizForLanguage('Python');">Take Quiz</button>
+              <button class="btn-lang-problems" onclick="closeLanguagesModal(); openProblemBankWithLanguage('Python');">Problems</button>
+            </div>
+          </div>
+
+          <!-- C++ -->
+          <div class="lang-card-item">
+            <div class="lang-card-header">
+              <span class="lang-card-icon">⚙️</span>
+              <div class="lang-card-title">
+                <h4>C++ Systems</h4>
+                <span>15 Questions • 3 Tiers</span>
+              </div>
+            </div>
+            <div class="lang-card-topics">
+              Pointers & Memory, STL Vectors, Maps, Templates, RAII & Time Complexity.
+            </div>
+            <div class="lang-card-actions">
+              <button class="btn-lang-quiz" onclick="closeLanguagesModal(); startQuizForLanguage('C++');">Take Quiz</button>
+              <button class="btn-lang-problems" onclick="closeLanguagesModal(); openProblemBankWithLanguage('C++');">Problems</button>
+            </div>
+          </div>
+
+          <!-- HTML5 -->
+          <div class="lang-card-item">
+            <div class="lang-card-header">
+              <span class="lang-card-icon">🌐</span>
+              <div class="lang-card-title">
+                <h4>HTML5 Web Core</h4>
+                <span>15 Questions • 3 Tiers</span>
+              </div>
+            </div>
+            <div class="lang-card-topics">
+              Semantic Markup, Forms & Validation, DOM API, Accessibility & SEO.
+            </div>
+            <div class="lang-card-actions">
+              <button class="btn-lang-quiz" onclick="closeLanguagesModal(); startQuizForLanguage('HTML');">Take Quiz</button>
+              <button class="btn-lang-problems" onclick="closeLanguagesModal(); openProblemBankWithLanguage('HTML');">Problems</button>
+            </div>
+          </div>
+
+          <!-- CSS3 -->
+          <div class="lang-card-item">
+            <div class="lang-card-header">
+              <span class="lang-card-icon">🎨</span>
+              <div class="lang-card-title">
+                <h4>CSS3 Modern Styling</h4>
+                <span>15 Questions • 3 Tiers</span>
+              </div>
+            </div>
+            <div class="lang-card-topics">
+              Flexbox, CSS Grid, Transitions, Keyframe Animations, Responsive Viewports.
+            </div>
+            <div class="lang-card-actions">
+              <button class="btn-lang-quiz" onclick="closeLanguagesModal(); startQuizForLanguage('CSS');">Take Quiz</button>
+              <button class="btn-lang-problems" onclick="closeLanguagesModal(); openProblemBankWithLanguage('CSS');">Problems</button>
+            </div>
+          </div>
+
+          <!-- JavaScript -->
+          <div class="lang-card-item">
+            <div class="lang-card-header">
+              <span class="lang-card-icon">⚡</span>
+              <div class="lang-card-title">
+                <h4>JavaScript (ES6+)</h4>
+                <span>20 Questions • 3 Tiers</span>
+              </div>
+            </div>
+            <div class="lang-card-topics">
+              Closures, Event Loop, Promises, Async/Await, Array Methods & Scope.
+            </div>
+            <div class="lang-card-actions">
+              <button class="btn-lang-quiz" onclick="closeLanguagesModal(); startQuizForLanguage('JavaScript');">Take Quiz</button>
+              <button class="btn-lang-problems" onclick="closeLanguagesModal(); openProblemBankWithLanguage('JavaScript');">Problems</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" onclick="closeLanguagesModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL: PLATFORM & ASSESSMENT SETTINGS
+       ======================================================================= -->
+  <div class="modal-backdrop" id="settings-modal">
+    <div class="modal-dialog" style="max-width: 560px;">
+      <div class="modal-header">
+        <div>
+          <h3>⚙️ Platform & Assessment Settings</h3>
+          <p style="font-size: 0.8rem; color: var(--slate-500); margin-top: 2px;">
+            Configure examination rules, code editor themes, and notification preferences
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="closeSettingsModal()">&times;</button>
+      </div>
+
+      <form onsubmit="savePlatformSettings(event)">
+        <div class="modal-body" style="padding: 24px;">
+          <!-- Section 1: Quiz Engine -->
+          <div class="settings-section-block">
+            <div class="settings-section-title">
+              <span>⏱️ MCQ Assessment Rules</span>
+            </div>
+
+            <div class="modal-field">
+              <label for="setting-quiz-timer">Default Countdown Duration</label>
+              <select id="setting-quiz-timer">
+                <option value="15">15 Minutes (Fast Track)</option>
+                <option value="20" selected>20 Minutes (Standard Exam)</option>
+                <option value="30">30 Minutes (Extended Mode)</option>
+                <option value="45">45 Minutes (Comprehensive Assessment)</option>
+              </select>
+            </div>
+
+            <div class="setting-toggle-row">
+              <div class="setting-info-col">
+                <h5>Auto-Submit on Timeout</h5>
+                <p>Automatically score and finish quiz when the countdown reaches 00:00</p>
+              </div>
+              <label class="switch-toggle">
+                <input type="checkbox" id="setting-auto-submit" checked>
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-toggle-row">
+              <div class="setting-info-col">
+                <h5>Instant Option Feedback</h5>
+                <p>Highlight correct/incorrect answer immediately upon selection (Practice Mode)</p>
+              </div>
+              <label class="switch-toggle">
+                <input type="checkbox" id="setting-instant-feedback">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Section 2: Code Workspace & IDE -->
+          <div class="settings-section-block">
+            <div class="settings-section-title">
+              <span>💻 Code Editor & Compiler Preferences</span>
+            </div>
+
+            <div class="modal-form-grid">
+              <div class="modal-field">
+                <label for="setting-editor-theme">Editor Theme</label>
+                <select id="setting-editor-theme" onchange="applyEditorTheme(this.value)">
+                  <option value="dark-github" selected>GitHub Dark (Default)</option>
+                  <option value="dark-monokai">Monokai Pro</option>
+                  <option value="dark-midnight">Midnight High-Contrast</option>
+                </select>
+              </div>
+              <div class="modal-field">
+                <label for="setting-editor-font">Font Size</label>
+                <select id="setting-editor-font" onchange="applyEditorFontSize(this.value)">
+                  <option value="13px">13px (Compact)</option>
+                  <option value="14px" selected>14px (Standard)</option>
+                  <option value="16px">16px (Comfortable)</option>
+                  <option value="18px">18px (Large)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="setting-toggle-row">
+              <div class="setting-info-col">
+                <h5>Auto-Close Brackets & Quotes</h5>
+                <p>Automatically insert closing brackets (), [], {} and quotation marks</p>
+              </div>
+              <label class="switch-toggle">
+                <input type="checkbox" id="setting-auto-brackets" checked>
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Section 3: Sound & Experience -->
+          <div class="settings-section-block">
+            <div class="settings-section-title">
+              <span>🔔 Audio & System Feedback</span>
+            </div>
+
+            <div class="setting-toggle-row">
+              <div class="setting-info-col">
+                <h5>Execution Audio Cues</h5>
+                <p>Play celebratory chime when test cases pass in Code Workspace</p>
+              </div>
+              <label class="switch-toggle">
+                <input type="checkbox" id="setting-sound-fx" checked>
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeSettingsModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Modular Application Entry Point -->
+  <script type="module" src="js/main.js?v=3"></script>
+</body>
+</html>

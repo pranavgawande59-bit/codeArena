@@ -1,0 +1,19 @@
+{
+  "name": "code-arena-web",
+  "version": "2.0.0",
+  "description": "CODE-ARENA Online MCQ Quiz & Algorithmic Problem Bank Full-Stack Web Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node -e \"require('./server/app.js'); console.log('Server healthcheck passed');\""
+  },
+  "keywords": [
+    "quiz",
+    "coding",
+    "leetcode",
+    "assessment"
+  ],
+  "author": "",
+  "license": "ISC"
+}
